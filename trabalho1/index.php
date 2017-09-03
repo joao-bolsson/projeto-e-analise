@@ -20,11 +20,9 @@ function sumExists(int $x, array $elements): bool {
 
     for ($i = 0; $i < $len; $i++) {
         $num = $elements[$i];
-        for ($j = $i + 1; $j < $len; $j++) {
-            $otherNum = $elements[$j];
-            if ($num + $otherNum == $x) {
-                return true;
-            }
+        $otherNum = $elements[$i + 1];
+        if ($num + $otherNum == $x) {
+            return true;
         }
     }
     return false;
