@@ -20,15 +20,26 @@ $x = 143;
  *
  * Caso médio: ?
  *
- * Melhor caso: quando os dois números, os quais a soma é x, estão nas extremidades do array
+ * Melhor caso: quando os dois números, os quais a soma é x, estão um em cada extremidade do array
  *  x = 180 S[0] + S[9] = 180 (1 repetição)
+ *
+ *
+ * Pior caso: O(n)
+ * Caso médio: entre 1 e O(n)
+ * Melhor caso: 1
  */
 
 
-var_dump(test2($x, $elements, 0, count($elements) - 1));
+var_dump(sumExists($x, $elements, 0, count($elements) - 1));
 
-function test2(int $x, array $elements, int $index, int $end): bool {
-    echo "index: " . $index . " | end: " . $end . "\n";
+/**
+ * @param int $x Sum to find.
+ * @param array $elements Sorted array.
+ * @param int $index First index to look.
+ * @param int $end Last index to look.
+ * @return bool If $elements contains two numbers whose sum is $x - true, else - false.
+ */
+function sumExists(int $x, array $elements, int $index, int $end): bool {
     if ($elements[$index] + $elements[$end] == $x) {
         return true;
     } else if ($end - $index == 1) {
@@ -36,9 +47,9 @@ function test2(int $x, array $elements, int $index, int $end): bool {
     }
 
     if ($elements[$index] + $elements[$end] > $x) {
-        return test2($x, $elements, $index, --$end);
+        return sumExists($x, $elements, $index, --$end);
     } else {
-        return test2($x, $elements, ++$index, $end);
+        return sumExists($x, $elements, ++$index, $end);
     }
 }
 
